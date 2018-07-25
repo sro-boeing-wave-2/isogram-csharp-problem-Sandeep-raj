@@ -1,25 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Linq;
 namespace Isogram
 {
     public class Isogram
     {
         public bool IsIsogram(string str)
         {
-            HashSet<Char> set = new HashSet<char>();
-            Regex regex = new Regex("[A-Za-z]");
-            foreach (Char c in str)
-            {
-                if (regex.Match(c.ToString()).Success)
-                {
-                    if (!(set.Contains(c)))
-                        set.Add(c);
-                    else
-                        return false;
-                }
-            }
+            if(Regex.Replace(str, @"[-\s]", string.Empty).Distinct().Count() == Regex.Replace(str, @"[-\s]", string.Empty).Count())
             return true;
+            return false;
         }
     }
 }
